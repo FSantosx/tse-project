@@ -1,3 +1,9 @@
+<template>
+  <div class="container">
+    <Bar v-if="loaded" :chart-data="chartData" />
+  </div>
+</template>
+
 <script>
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
@@ -5,7 +11,7 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'g5Graph',
+  name: 'BarChart',
   components: { Bar },
   data: () => ({
     loaded: false,
@@ -15,11 +21,11 @@ export default {
     this.loaded = false
 
     try {
-      const { nd } = await fetch('#')
-      
-      this.chartdata = nd
+      const { userlist } = await fetch('http://localhost:3000/api/cand', {"method":"get"})
+      this.chartdata = userlist
 
       this.loaded = true
+      console.Console("Uhu")
     } catch (e) {
       console.error(e)
     }
