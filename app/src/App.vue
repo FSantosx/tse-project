@@ -1,6 +1,6 @@
 <template>
-  <tHeader/>
-  <tGraph/>
+  <tHeader />
+  <tGraph />
   <tFooter/>
 </template>
 
@@ -14,7 +14,19 @@ export default {
   name: 'App',
   components: {
    tFooter, tGraph, tHeader
-  } 
+  },
+  data() {
+    return {
+      post: []
+    }
+  },
+  methods: {
+    getPosts() {
+        fetch('https://jsonplaceholder.typicode.com/posts/')
+        .then(response => response.json())
+        .then(data => this.post = data)
+    }
+  }
 }
 </script>
 
